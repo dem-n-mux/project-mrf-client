@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Table, Button, Space, Modal } from "antd";
 import { FaTrash } from "react-icons/fa";
+import CandidateForm from "@/components/CandidateForm";
 
 const data = [
   {
@@ -73,9 +74,10 @@ const Candidates = () => {
         title="Add Candidate"
         open={isModalVisible}
         footer={null}
+        width={800}
         onCancel={() => setIsModalVisible(false)}
       >
-        <h1>Hello People</h1>
+        <CandidateForm />
       </Modal>
     </div>
   );
