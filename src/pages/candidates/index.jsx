@@ -57,6 +57,13 @@ const columns = [
 const Candidates = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
+  const [currentStep, setCurrentStep] = useState(0);
+
+  const handleCloseModal = () => {
+    setIsModalVisible(false);
+    setCurrentStep(0); 
+  };
+
   return (
     <div>
       <div className="flex justify-between items-center mb-4">
@@ -75,9 +82,13 @@ const Candidates = () => {
         open={isModalVisible}
         footer={null}
         width={800}
-        onCancel={() => setIsModalVisible(false)}
+        onCancel={handleCloseModal}
       >
-        <CandidateForm />
+        <CandidateForm
+    setIsModalVisible={setIsModalVisible}
+    current={currentStep}
+    setCurrent={setCurrentStep}
+  />
       </Modal>
     </div>
   );

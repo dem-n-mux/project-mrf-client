@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Layout, Menu } from "antd";
 import {
   FaTachometerAlt,
@@ -15,6 +15,8 @@ const SidebarLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 
   const toggleCollapse = () => {
     setCollapsed(!collapsed);
@@ -28,6 +30,7 @@ const SidebarLayout = () => {
 
   const handleMenuClick = ({ key }) => {
     if (key === "4") {
+      localStorage.removeItem("isLoggedIn");
       navigate("/login");
     } else {
       const keyToPath = {
@@ -40,6 +43,12 @@ const SidebarLayout = () => {
   };
 
   const selectedKey = pathToKey[location.pathname] || "";
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/login");
+    }
+  }, []);
 
   return (
     <Layout style={{ minHeight: "100vh" }}>

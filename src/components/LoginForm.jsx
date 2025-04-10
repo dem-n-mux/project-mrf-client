@@ -1,13 +1,18 @@
 import React from "react";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import { FaUser, FaLock } from "react-icons/fa";
 
 const LoginForm = () => {
   const navigate = useNavigate();
   const onFinish = (values) => {
-    console.log("Success:", values);
-    navigate("/");
+    if (values.username === "admin" && values.password === "12345678") {
+      localStorage.setItem("isLoggedIn", true);
+      message.success("Login Successful");
+      navigate("/");
+    } else {
+      message.error("Incorrect Credentials");
+    }
   };
 
   return (
